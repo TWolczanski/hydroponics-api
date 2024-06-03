@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from core.managers import HydroponicSystemManager
 
 
 class User(AbstractUser):
@@ -15,6 +16,8 @@ class HydroponicSystem(models.Model):
         User, on_delete=models.CASCADE, related_name="hydroponic_systems"
     )
     created_at = models.DateTimeField(default=timezone.now)
+
+    objects = HydroponicSystemManager()
 
 
 class SensorReading(models.Model):
