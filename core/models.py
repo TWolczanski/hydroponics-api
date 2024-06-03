@@ -8,6 +8,9 @@ class User(AbstractUser):
 
 
 class HydroponicSystem(models.Model):
+    name = models.CharField(max_length=75, blank=True)
+    description = models.CharField(max_length=800, blank=True)
+    plant_count = models.PositiveIntegerField()
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="hydroponic_systems"
     )
