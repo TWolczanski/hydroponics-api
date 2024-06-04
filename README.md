@@ -1,4 +1,15 @@
-# API documentation
+# Installation
+```
+$ docker compose build
+$ docker compose run backend python manage.py migrate
+```
+
+# Starting
+```
+$ docker compose up
+```
+
+# Documentation
 ## Authentication
 ### `POST /auth/registration`
 Registers a new user.
@@ -44,7 +55,7 @@ Query parameters:
 * `ordering`, e.g. `ordering=plant_count` (supports ordering by `name`, `plant_count` and `created_at`)
 * `page`, e.g. `page=2`
 
-Returns a paginated list of user's hydroponic systems.
+Returns a paginated list of user's hydroponic systems. If `ordering` was not specified, the list will ordered by `created_at`.
 
 Response example:
 ```json
@@ -146,7 +157,7 @@ Query parameters:
 * `ordering`, e.g. `ordering=water_temp` (supports ordering by `ph`, `water_temp`, `tds` and `created_at`)
 * `page`, e.g. `page=2`
 
-Returns a paginated list of sensor readings related to user's hydroponic systems.
+Returns a paginated list of sensor readings related to user's hydroponic systems. If `ordering` was not specified, the list will ordered by `created_at`.
 
 Response example:
 ```json
