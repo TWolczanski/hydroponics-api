@@ -35,9 +35,13 @@ Response example:
 ### `GET /hydroponic_systems`
 Query parameters:
 * `name`, e.g. `name=some_name`
-* `plant_count`, e.g. `plant_count=3` or `plant_count=3,9` (`3 <= plant_count <= 9`)
-* `created_at`
-* `ordering`, e.g. `ordering=plant_count`
+* `plant_count`, e.g. `plant_count=3`
+* `plant_count__gte`, e.g. `plant_count__gte=3` (`plant_count >= 3`)
+* `plant_count__lte`, e.g. `plant_count__lte=3` (`plant_count <= 3`)
+* `created_at`, e.g. `created_at=2016-01-01T8:00:00+01:00`
+* `created_at__gte`, e.g. `created_at__gte=2016-01-01T8:00:00+01:00` (`created_at >= 2016-01-01T8:00:00+01:00`)
+* `created_at__lte`, e.g. `created_at__lte=2016-01-01T8:00:00+01:00` (`created_at <= 2016-01-01T8:00:00+01:00`)
+* `ordering`, e.g. `ordering=plant_count` (supports ordering by `name`, `plant_count` and `created_at`)
 * `page`, e.g. `page=2`
 
 Returns a paginated list of user's hydroponic systems.
@@ -73,6 +77,14 @@ Response example:
   "plant_count": 3,
   "created_at": "2022-09-18T15:12:09+0000",
   "recent_sensor_readings": [
+    {
+      "id": 1,
+      "ph": "3.7",
+      "water_temp": "20.1",
+      "tds": "400.5",
+      "hydroponic_system": 1,
+      "created_at": "2022-09-18T15:12:09+0000"
+    },
     ...
   ]
 }
@@ -119,12 +131,20 @@ Deletes a hydroponic system with the given id.
 ## Sensor readings
 ### `GET /sensor_readings`
 Query parameters:
-* `ph`, e.g. `ph=3.7` or `ph=3,5` (`3 <= ph <= 5`)
-* `water_temp`, e.g. `water_temp=20.1` or `water_temp=18,23` (`18 <= water_temp <= 23`)
-* `tds`, e.g. `tds=400.5` or `tds=100,300` (`100 <= tds <= 300`)
+* `ph`, e.g. `ph=3.5`
+* `ph__gte`, e.g. `ph__gte=3.5` (`ph >= 3.5`)
+* `ph__lte`, e.g. `ph__lte=3.5` (`ph <= 3.5`)
+* `water_temp`, e.g. `water_temp=20.1`
+* `water_temp__gte`, e.g. `water_temp__gte=20.1` (`water_temp >= 20.1`)
+* `water_temp__lte`, e.g. `water_temp__lte=20.1` (`water_temp <= 20.1`)
+* `tds`, e.g. `tds=400.6`
+* `tds__gte`, e.g. `tds__gte=400.6` (`tds >= 400.6`)
+* `tds__lte`, e.g. `tds__lte=400.6` (`tds <= 400.6`)
 * `hydroponic_system`, e.g. `hydroponic_system=1`
-* `created_at`
-* `ordering`, e.g. `ordering=water_temp`
+* `created_at`, e.g. `created_at=2016-01-01T8:00:00+01:00`
+* `created_at__gte`, e.g. `created_at__gte=2016-01-01T8:00:00+01:00` (`created_at >= 2016-01-01T8:00:00+01:00`)
+* `created_at__lte`, e.g. `created_at__lte=2016-01-01T8:00:00+01:00` (`created_at <= 2016-01-01T8:00:00+01:00`)
+* `ordering`, e.g. `ordering=water_temp` (supports ordering by `ph`, `water_temp`, `tds` and `created_at`)
 * `page`, e.g. `page=2`
 
 Returns a paginated list of sensor readings related to user's hydroponic systems.
