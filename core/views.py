@@ -17,6 +17,7 @@ class HydroponicSystemViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = HydroponicSystemFilter
     ordering_fields = ["name", "plant_count", "created_at"]
+    ordering = ["created_at"]
 
     def get_queryset(self):
         user = self.request.user
@@ -29,8 +30,10 @@ class HydroponicSystemViewSet(ModelViewSet):
 
     def get_permissions(self):
         permission_classes = [IsAuthenticated]
+
         if self.action in ["retrieve", "update", "partial_update", "destroy"]:
             permission_classes.append(IsHydroponicSystemOwner)
+
         return [permission_class() for permission_class in permission_classes]
 
     def perform_create(self, serializer):
@@ -44,14 +47,14 @@ class SensorReadingViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = SensorReadingFilter
     ordering_fields = ["ph", "water_temp", "tds", "created_at"]
+    ordering = ["created_at"]
 
     def get_queryset(self):
         user = self.request.user
         return SensorReading.objects.filter(hydroponic_system__owner=user)
 
     def perform_create(self, serializer):
-        hydroponic_system = serializer.validated_data["hydroponic_system"]
-        owner = HydroponicSystem.objects.get(pk=hydroponic_system).owner
+        owner = serializer.validated_data["hydroponic_system"].owner
 
         if self.request.user != owner:
             raise PermissionDenied("You are not the owner of the hydroponic system.")
