@@ -77,7 +77,7 @@ Response example:
 ```
 
 ### `GET /hydroponic_systems/{id}`
-Returns a hydroponic system with the given id.
+Returns a hydroponic system with the given id. The `recent_sensor_readings` field contains 10 most recently added sensor readings.
 
 Response example:
 ```json
