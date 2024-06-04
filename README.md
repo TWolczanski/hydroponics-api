@@ -108,7 +108,6 @@ Updates a hydroponic system.
 Request example:
 ```json
 {
-  "id": 1,
   "name": "Lorem ipsum",
   "description": "Dolor sit amet",
   "plant_count": 5
